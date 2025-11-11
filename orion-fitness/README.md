@@ -1,73 +1,106 @@
-# React + TypeScript + Vite
+# Orion Fitness
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema completo de gerenciamento de produtos para uma loja de suplementos e acessórios fitness.  
+O projeto possui **front-end** em React + Vite + TypeScript e **back-end** em Spring Boot com Spring Data JPA.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias
 
-## React Compiler
+### Front-end
+- React 18
+- TypeScript
+- Vite
+- Axios (para requisições HTTP)
+- CSS modularizado
+- React Router DOM (para rotas)
+  
+### Back-end
+- Java 21
+- Spring Boot
+- Spring Data JPA
+- Hibernate
+- Banco de dados (H2/MySQL/PostgreSQL)
+- Lombok
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
+## Estrutura de Pastas
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Front-end (`src`)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+src/
+├─ components/        # Componentes reutilizáveis (Card, Header, Modal)
+├─ page/              # Páginas (Home, Produtos, Admin, EditModal)
+├─ interface/         # Tipagens TypeScript
+├─ services/          # Axios e funções para API
+└─ css/               # Arquivos CSS
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+
+### Back-end
+```
+
+src/main/java/com/poo/orion/
+├─ Controller/        # Endpoints REST
+├─ DTO/               # Data Transfer Objects
+├─ Enum/              # Enums (Categoria)
+├─ Model/             # Entidades JPA
+├─ Repository/        # Repositórios Spring Data
+└─ Service/           # Lógica de negócio
+
+````
+
+---
+
+## Como rodar o projeto
+
+### 1. Back-end
+1. Abra o projeto no IDE (IntelliJ, Eclipse, VSCode)
+2. Configure o banco de dados no `application.properties`:
+```properties
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto=update
+````
+
+3. Rode a aplicação (`SpringBootApplication`)
+4. API REST estará disponível em: `http://localhost:8080/produtos`
+5. Link do Swagger: `http://localhost:8080/swagger-ui/index.html`
+
+---
+
+### 2. Front-end
+
+1. Instale dependências:
+
+```bash
+npm install
+```
+
+2. Rode o servidor de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+3. Abra no navegador:
+
+```
+http://localhost:5173
+```
+
+---
+
+## Endpoints da API
+
+| Método | Endpoint                 | Descrição                     |
+| ------ | ------------------------ | ----------------------------- |
+| GET    | /produtos                | Lista todos os produtos       |
+| GET    | /produtos/{id}           | Retorna produto por ID        |
+| POST   | /produtos/criar          | Cria novo produto             |
+| PUT    | /produtos/atualizar/{id} | Atualiza produto existente    |
+| DELETE | /produtos/{id}           | Remove produto por ID         |
+| DELETE | /produtos/deleteAll      | Remove todos os produtos      |
+| GET    | /produtos/categoria      | Filtra produtos por categoria |
