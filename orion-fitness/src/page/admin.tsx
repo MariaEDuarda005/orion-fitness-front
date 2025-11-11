@@ -4,11 +4,12 @@ import type { produtosData } from "../interface/produtosData.tsx";
 import "../css/admin.css";
 import EditModal from "./editModal.tsx";
 import CreateModal from "./createModal.tsx";
+import type { produtosEdit } from "../interface/produtoEdit.tsx";
 
 export default function Admin() {
   const [produtos, setProdutos] = useState<produtosData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editProduto, setEditProduto] = useState<produtosData | null>(null);
+  const [editProduto, setEditProduto] = useState<produtosEdit | null>(null);
   const [showCreate, setShowCreate] = useState(false);
 
   async function loadProdutos() {

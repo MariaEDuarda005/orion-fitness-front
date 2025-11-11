@@ -9,13 +9,13 @@ export default function Header() {
     <header className="header">
       <div className="infos">
         <img src={Logo} alt="Logo Orion" />
-        <h1 className="logo">Meu Site</h1>
+        <h1 className="logo">Orion Fitness</h1>
       </div>
       <nav className="nav">
         <Link to="/" className={pathname === "/" ? "active" : ""}>Home</Link>
         <Link to="/sobre" className={pathname === "/sobre" ? "active" : ""}>Sobre</Link>
         <Link to="/produtos" className={pathname === "/produtos" ? "active" : ""}>Produtos</Link>
-        <Link to="/admin" className={pathname === "/admin" ? "active" : ""}>admin</Link>
+        <Link to="/admin" className={pathname === "/admin" ? "active" : ""}>Admin</Link>
       </nav>
     </header>
   );
